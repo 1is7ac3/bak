@@ -1,0 +1,5 @@
+#!/bin/zsh
+folder=~/Imágenes/$(date '+%d-%m-%Y')
+mkdir -p $folder
+#mkdir -p ~/Imágenes/$(date '+%d-%m-%Y')
+scrot $folder/%d-%m-%Y_%H-%M.%S.png
