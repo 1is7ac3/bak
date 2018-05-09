@@ -25,7 +25,7 @@ import os
 from lxml import html
 import requests
 #version en la pantalla
-version='JKED 0.2 \n'
+version='JKED 0.3 \n'
 
 class Episode:
 	def __init__(self, name, num, url):
@@ -138,8 +138,8 @@ def main():
 	title=busque[choice].name
 	servi=GetEpisodes(busque[choice].url)
 	titleCapitulo=servi[0].namecap
-	#Seleccionar Ubicacion de Descarga 	
-	path='/home/isaac/Anime'
+	#Ubicacion de Descarga 	
+	path=os.environ['HOME']+'/Anime'
 	#Nombre Carpeta
 	if not os.path.exists(path):
 		os.mkdir(path)

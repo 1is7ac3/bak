@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Firefox
+Exec=apulse firefox
+Icon=firefox
+Categories=Network;WebBrowser;
