@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Application
-Name=Firefox
-Exec=apulse firefox
+Name=Firefox Nightly
+Exec=firefox
+Comment=Navegador de Internet Firefox Nocturno
 Icon=firefox
 Categories=Network;WebBrowser;
