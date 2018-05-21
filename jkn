@@ -139,7 +139,7 @@ def main():
 	servi=GetEpisodes(busque[choice].url)
 	titleCapitulo=servi[0].namecap
 	#Ubicacion de Descarga 	
-	path=os.environ['HOME']+'/Anime'
+	path=os.environ['HOME']+'/.Anime'
 	#Nombre Carpeta
 	if not os.path.exists(path):
 		os.mkdir(path)
