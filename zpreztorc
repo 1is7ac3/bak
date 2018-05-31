@@ -87,7 +87,7 @@ zstyle ':prezto:load' pmodule \
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
-zstyle ':prezto:module:prompt' theme 'agnoster'
+zstyle ':prezto:module:prompt' theme 'pure'
 # Set the working directory prompt display length.
 # By default, it is set to 'short'. Set it to 'long' (without '~' expansion)
 # for longer or 'full' (with '~' expansion) for even longer prompt display.
@@ -178,4 +178,3 @@ alias dl='youtube-dl'
 alias mp3='youtube-dl -x --audio-format mp3 -o "~/Música/%(title)s.%(ext)s"'
 alias fil='xbps-query -Rvo'
 alias se='xbps-query -Rvs'
-alias firefox='apulse firefox'
