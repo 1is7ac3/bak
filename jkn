@@ -3,7 +3,7 @@
 #
 #	Basado en Underanime.py
 #  
-#  Copyright 2017 Isaac <isaac@isaac-S10>
+#  Copyright 2017 Isaac Quiroz <isaac.qa13@gmail.com>
 #  
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -96,7 +96,7 @@ def GetEpisodes(url):
 		seList.append(servidor)
 	return seList
 		
-def Aria(stream, savePath, titleCapitulo):
+def Download(stream, savePath, titleCapitulo):
 	i=0
 	while i<len(stream):
                 n=str(i)
@@ -147,7 +147,7 @@ def main():
 	savePath = os.path.join(path, folderName)
 	if not os.path.exists(savePath):
 		os.mkdir(savePath)
-	descarga=Aria(servi, savePath, titleCapitulo)
+	descarga=Download(servi, savePath, titleCapitulo)
 	
 	
 if __name__=="__main__":
