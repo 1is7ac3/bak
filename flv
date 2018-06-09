@@ -43,6 +43,8 @@ def GetUrl(Url):
 def GetAllCap(url,title):
 	path=os.environ['HOME']+'/.Anime'
 	#Nombre Carpeta
+	if not os.path.exists(path):
+		os.mkdir(path)
 	savePath = os.path.join(path, title)
 	if not os.path.exists(savePath):
 		os.mkdir(savePath)
@@ -189,7 +191,9 @@ def main():
 					cap=DisplayCapitulos(capitulo)
 					#servi=GetServidor(capitulo[cap].url)
 					titleCapitulo= capitulo[cap].ncap
-					path=os.environ['HOME']+'/.Anime'	
+					path=os.environ['HOME']+'/.Anime'
+					if not os.path.exists(path):
+						os.mkdir(path)	
 					savePath = os.path.join(path, title)
 					if not os.path.exists(savePath):
 						os.mkdir(savePath)
