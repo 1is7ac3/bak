@@ -27,7 +27,7 @@ import requests
 import os
 from lxml import html
 #Imprimir versión
-version='DownSerie 0.3\n'
+version='DownSerie 0.4\n'
 #Clase Serie 
 class Serie:
 	def __init__(self, name, num, url):
@@ -74,10 +74,9 @@ def SearchEngine(search):
 	#Se revisa el estado de la pagina
 	page=GetUrl(searchUrl)
 	#Captura los enlaces de las diez primeras series
-	Links=page.xpath('//table/tr/td/a[@class="titl"]/@href')
+	Links=page.xpath('//div[@class="let-post"]/h2/a/@href')
 	#Captura el nombre de las series desde la pagina web
-	Names=page.xpath('//table/tr/td/a/text()')
-
+	Names=page.xpath('//div[@class="let-post"]/h2/a/text()')
 	# Revisa que los nombres coincidan en numero con los enlaces
 	linkNum=len(Links)
 	if linkNum!=len(Names):
@@ -136,7 +135,7 @@ def GetAllCap(url,title):
 	#Se verifica la url de los capítulos
 	page=GetUrl(url)
 	#se extrae los datos del numero de paginas 
-	pageLink=page.xpath('//div[@class="listnavi"]/a/text()')
+	pageLink=page.xpath('//div[@class="navigation"]/a/text()')
 	#Se obtiene el numero de paginas 
 	linkpa=len(pageLink)
 	#Obtener el numero del primer capitulo de la ultima pagina 
@@ -156,9 +155,9 @@ def GetAllCap(url,title):
 		#Extrae el enlace de descarga
 		rawLinks = page.xpath('//iframe[@class="player_conte"]/@src')
 		#Extrae el nombre del capitulo
-		epNames = page.xpath('//div[@class="vervideo"]/text()')
+		epNames = page.xpath('//div[@class="video-header"]/h1/text()')
 		#Extrae el nombre del servidor de descarga
-		seNames=page.xpath('//div[@class="video_option"]/a/text()')
+		seNames=page.xpath('//ul[@class="server-tab"]//a/text()')
 		#Verifica que coincida el numero de enlaces con los nombres de servidor
 		linkse=len(rawLinks)
 		if linkse!=len(seNames):
@@ -181,6 +180,7 @@ def Download(capitulo,savePath):
                 n=str(i)
                 dl='youtube-dl -o "'+savePath+'/'+capitulo[0].namecap+' '+n+'.mp4''"'+' '+capitulo[i].url
                 #Llama el comando desde el terminal
+                er=os.system(dl)
                 er=os.system(dl)
                 if er==0:
                         i=len(capitulo)

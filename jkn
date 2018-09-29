@@ -1,31 +1,11 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-#
-#	Basado en Underanime.py
-#  
-#  Copyright 2017 Isaac Quiroz <isaac.qa13@gmail.com>
-#  
-#  This program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation; either version 2 of the License, or
-#  (at your option) any later version.
-#  
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#  
-#  You should have received a copy of the GNU General Public License
-#  along with this program; if not, write to the Free Software
-#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-#  MA 02110-1301, USA.
-#  
 #  
 import os
 from lxml import html
 import requests
 #version en la pantalla
-version='JKED 0.3 \n'
+version='JKED 0.4 \n'
 
 class Episode:
 	def __init__(self, name, num, url):
@@ -66,8 +46,8 @@ def GetUrl(Url):
 def SearchEngine():
 	searchUrl='http://jkanime.net'
 	page=GetUrl(searchUrl)
-	serieLinks=page.xpath('//ul[@class="ratedul"]//a[@class="rated_title"]/@href')
-	serieNames=page.xpath('//ul[@class="ratedul"]//a[@class="rated_title"]/text()')
+	serieLinks=page.xpath('//div[@class="overview"]//a[@class="odd"]/@href')
+	serieNames=page.xpath('//div[@class="overview"]//a[@class="odd"]//h2/text()')
 	linkNum=len(serieLinks)
 	if linkNum!=len(serieNames):
 		print ('[!] Error Faltan Enlaces!')
@@ -82,8 +62,8 @@ def SearchEngine():
 def GetEpisodes(url):
 	page=GetUrl(url)
 	rawLinks = page.xpath('//iframe[@class="player_conte"]/@src')
-	epNames = page.xpath('//div[@class="vervideo"]/text()')
-	seNames=page.xpath('//div[@class="video_option"]/a/text()')
+	epNames = page.xpath('//div[@class="video-header"]/h1/text()')
+	seNames=page.xpath('//ul[@class="server-tab"]//a/text()')
 	linkse=len(rawLinks)
 	if linkse!=len(seNames):
 		print ('[!] Error Faltan Enlaces!')
