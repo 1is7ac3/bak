@@ -163,29 +163,31 @@ def GetAllCap(url,title):
 		if linkse!=len(seNames):
 			print ('[!] Error Faltan Enlaces!')
 			return False
-		#Crea lista vaciá 
+		#Crea lista vaciá
 		capitulo=[]
 		#Ciclo para la descarga del capitulo
 		for n in range(0, linkse):
 			#Arreglo que Almacena url y el nombre del capitulo usando la clase Capitulo
 			capitulo.append(Capitulo(rawLinks[n].replace('jk.php?u=', ''), epNames[0]))
+		saveFile=os.path.join(savePath, capitulo[0].namecap)
 		#lanza función download
-		Download(capitulo,savePath) 
+		Download(capitulo,saveFile) 
 		
 			
-def Download(capitulo,savePath):
+def Download(capitulo,saveFile):
         #Variable para control ciclo
         i=0
         while  i<len(capitulo):
                 n=str(i)
-                dl='youtube-dl -o "'+savePath+'/'+capitulo[0].namecap+' '+n+'.mp4''"'+' '+capitulo[i].url
+                dl='youtube-dl -o ''"'+saveFile+' '+n+'.mp4''"'+' '+capitulo[i].url
                 #Llama el comando desde el terminal
                 er=os.system(dl)
-                er=os.system(dl)
-                if er==0:
-                        i=len(capitulo)
-                else:
+                if er!=0 and not os.path.isfile(saveFile+' '+n+'.mp4'):
                         i+=1
+                elif er!=0 and os.path.isfile(saveFile+' '+n+'.mp4'):
+                  er=os.system(dl)
+                else:
+                        i=len(capitulo)
                         
 #Función principal
 def main():
