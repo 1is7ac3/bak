@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=PowerPoint 2016
+Exec=env WINEPREFIX="/home/sandra/.wine" wine C:\\\\windows\\\\command\\\\start.exe /Unix /home/sandra/.wine/dosdevices/c:/users/sandra/Start\\ Menu/Programs/PowerPoint\\ 2016.lnk
+Type=Application
+StartupNotify=true
+Comment=Diseña y realiza atractivas presentaciones con facilidad y confianza.
+Icon=BDC3_pptico.0
+StartupWMClass=powerpnt.exe

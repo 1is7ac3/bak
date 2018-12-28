@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Microsoft PowerPoint
+MimeType=application/x-wine-extension-pothtml;
+Exec=env WINEPREFIX="/home/sandra/.wine" wine start /ProgIDOpen powerpointhtmltemplate %f
+NoDisplay=true
+StartupNotify=true
+Icon=687A_POWERPNT.0

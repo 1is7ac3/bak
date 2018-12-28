@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Microsoft Excel
+MimeType=text/x-ms-iqy;
+Exec=env WINEPREFIX="/home/sandra/.wine" wine start /ProgIDOpen iqyfile %f
+NoDisplay=true
+StartupNotify=true
+Icon=FF1E_EXCEL.0

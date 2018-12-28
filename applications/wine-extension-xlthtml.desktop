@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Microsoft Excel
+MimeType=application/x-wine-extension-xlthtml;
+Exec=env WINEPREFIX="/home/sandra/.wine" wine start /ProgIDOpen Excelhtmltemplate %f
+NoDisplay=true
+StartupNotify=true
+Icon=3D01_EXCEL.0

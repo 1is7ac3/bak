@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Excel 2016
+Exec=env WINEPREFIX="/home/sandra/.wine" wine C:\\\\windows\\\\command\\\\start.exe /Unix /home/sandra/.wine/dosdevices/c:/users/sandra/Start\\ Menu/Programs/Excel\\ 2016.lnk
+Type=Application
+StartupNotify=true
+Comment=Descubre, visualiza y comparte información fácilmente a partir de tus datos.
+Icon=316D_xlicons.0
+StartupWMClass=excel.exe

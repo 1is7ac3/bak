@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Microsoft Excel
+MimeType=application/vnd.ms-excel;
+Exec=env WINEPREFIX="/home/sandra/.wine" wine start /ProgIDOpen Excel.Macrosheet %f
+NoDisplay=true
+StartupNotify=true
+Icon=3D01_EXCEL.0

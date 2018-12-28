@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Microsoft Word
+MimeType=application/x-wine-extension-dochtml;
+Exec=env WINEPREFIX="/home/sandra/.wine" wine start /ProgIDOpen wordhtmlfile %f
+NoDisplay=true
+StartupNotify=true
+Icon=6BF2_WINWORD.0

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Microsoft Word
+MimeType=application/vnd.oasis.opendocument.text;
+Exec=env WINEPREFIX="/home/sandra/.wine" wine start /ProgIDOpen Word.OpenDocumentText.12 %f
+NoDisplay=true
+StartupNotify=true
+Icon=6BF2_WINWORD.0
