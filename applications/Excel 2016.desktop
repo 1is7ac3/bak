@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Excel 2016
+Exec=wine 'C:\Program Files/Microsoft Office/Office16/EXCEL.EXE'
+Type=Application
+StartupNotify=true
+Comment=Descubre, visualiza y comparte información fácilmente a partir de tus datos.
+Icon=316D_xlicons.0
+StartupWMClass=excel.exe
+Categories=Office;

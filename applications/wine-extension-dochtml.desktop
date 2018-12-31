@@ -2,7 +2,7 @@
 Type=Application
 Name=Microsoft Word
 MimeType=application/x-wine-extension-dochtml;
-Exec=env WINEPREFIX="/home/sandra/.wine" wine start /ProgIDOpen wordhtmlfile %f
+Exec=env WINEPREFIX="/home/1is7ac3/.wine" wine start /ProgIDOpen wordhtmlfile %f
 NoDisplay=true
 StartupNotify=true
 Icon=6BF2_WINWORD.0

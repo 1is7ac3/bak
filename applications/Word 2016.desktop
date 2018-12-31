@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Word 2016
+Exec=wine 'C:\Program Files/Microsoft Office/Office16/WINWORD.EXE'
+Type=Application
+StartupNotify=true
+Comment=Crea atractivos documentos, trabaja fácilmente con otras personas y disfruta de la lectura.
+Icon=1DAC_wordicon.0
+StartupWMClass=winword.exe
+Categories=Office;

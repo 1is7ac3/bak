@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Office XML Handler
+MimeType=application/xml;
+Exec=env WINEPREFIX="/home/1is7ac3/.wine" wine start /ProgIDOpen xmlfile %f
+NoDisplay=true
+StartupNotify=true
+Icon=8C81_MSOXMLED.0

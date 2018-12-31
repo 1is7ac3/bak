@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+NoDisplay=true
+Exec=/home/1is7ac3/Git/firefox/firefox-bin %u
+Name=Firefox
+Comment=Definición personalizada para Firefox
