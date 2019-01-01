@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Microsoft PowerPoint
-MimeType=application/vnd.ms-powerpoint;
-Exec=env WINEPREFIX="/home/sandra/.wine" wine start /ProgIDOpen PowerPoint.Addin.8 %f
-NoDisplay=true
-StartupNotify=true
-Icon=687A_POWERPNT.0

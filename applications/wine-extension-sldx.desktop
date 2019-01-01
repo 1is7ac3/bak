@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Microsoft PowerPoint
-MimeType=application/vnd.openxmlformats-officedocument.presentationml.slide;
-Exec=env WINEPREFIX="/home/sandra/.wine" wine start /ProgIDOpen PowerPoint.Slide.12 %f
-NoDisplay=true
-StartupNotify=true
-Icon=CE1A_POWERPNT.0

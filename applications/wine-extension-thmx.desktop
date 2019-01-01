@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Microsoft PowerPoint
-MimeType=application/vnd.ms-officetheme;
-Exec=env WINEPREFIX="/home/sandra/.wine" wine start /ProgIDOpen OfficeTheme.12 %f
-NoDisplay=true
-StartupNotify=true
-Icon=687A_POWERPNT.0

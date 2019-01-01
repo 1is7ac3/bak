@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=Word 2016
-Exec=env WINEPREFIX="/home/sandra/.wine" wine C:\\\\windows\\\\command\\\\start.exe /Unix /home/sandra/.wine/dosdevices/c:/users/sandra/Start\\ Menu/Programs/Word\\ 2016.lnk
-Type=Application
-StartupNotify=true
-Comment=Crea atractivos documentos, trabaja fácilmente con otras personas y disfruta de la lectura.
-Icon=1DAC_wordicon.0
-StartupWMClass=winword.exe

@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=The Conquerors
-Exec=env WINEPREFIX="/home/sandra/.wine" wine C:\\\\windows\\\\command\\\\start.exe /Unix /home/sandra/.wine/dosdevices/c:/ProgramData/Microsoft/Windows/Start\\ Menu/Programs/Microsoft\\ Games/Age\\ of\\ Empires\\ II\\ -\\ The\\ Conquerors\\ Expansion/The\\ Conquerors.lnk
-Type=Application
-StartupNotify=true
-Path=/home/sandra/.wine/dosdevices/c:/Program Files/Microsoft Games/Age of Empires II
-Icon=B1CE_age2_x1.0
-StartupWMClass=age2_x1.exe

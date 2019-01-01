@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=notepad
-MimeType=application/x-wine-extension-exc;
-Exec=env WINEPREFIX="/home/1is7ac3/.wine" wine start /ProgIDOpen txtfile %f
-NoDisplay=true
-StartupNotify=true
-Icon=1E64_notepad.0
