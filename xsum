@@ -1,2 +1,0 @@
-#!/bin/bash
-xgensum -i srcpkgs/$1/template

@@ -1,2 +1,0 @@
-#!/bin/bash
-./xbps-src pkg $1
