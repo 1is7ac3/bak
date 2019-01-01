@@ -1,0 +1,136 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+#  
+import os
+from lxml import html
+import requests
+#version en la pantalla
+version='JKED 0.4 \n'
+
+class Episode:
+	def __init__(self, name, num, url):
+		self.name=name
+		self.num=num
+		self.url=url
+		
+class Servidor:
+	def __init__(self, url, num, name, namecap ):
+		self.url=url
+		self.num=num
+		self.name=name
+		self.namecap=namecap
+		
+class Serie:
+	def __init__(self, name, url, num):
+		self.name=name
+		self.url=url
+		self.num=num
+		
+def Clear():
+	if os.name=="posix":
+		os.system('clear')
+	else:
+		os.system('cls')
+	return
+		
+def GetUrl(Url):
+	try:
+		page=requests.get(Url)
+	except:
+		print("[!] Error al Conectar!")
+		return False
+	page=html.fromstring(page.content)
+	return page
+			
+	# Realiza la busqueda de enlaces
+def SearchEngine():
+	searchUrl='http://jkanime.net'
+	page=GetUrl(searchUrl)
+	serieLinks=page.xpath('//div[@class="overview"]//a[@class="odd"]/@href')
+	serieNames=page.xpath('//div[@class="overview"]//a[@class="odd"]//h2/text()')
+	linkNum=len(serieLinks)
+	if linkNum!=len(serieNames):
+		print ('[!] Error Faltan Enlaces!')
+		return False
+	# Crear lista Serie
+	serieList=[]
+	for n in range(0, linkNum):
+		serie=Serie(serieNames[n],serieLinks[n], n)
+		serieList.append(serie)
+	return serieList
+
+def GetEpisodes(url):
+	page=GetUrl(url)
+	rawLinks = page.xpath('//iframe[@class="player_conte"]/@src')
+	epNames = page.xpath('//div[@class="video-header"]/h1/text()')
+	seNames=page.xpath('//ul[@class="server-tab"]//a/text()')
+	linkse=len(rawLinks)
+	if linkse!=len(seNames):
+		print ('[!] Error Faltan Enlaces!')
+		return False
+	 #Crear lista Servidor
+	seList=[]
+	for n in range(0, linkse):
+		rawLinks[n].replace('jk.php?u=', '')
+		servidor=Servidor(rawLinks[n], n, seNames[n], epNames[0])
+		seList.append(servidor)
+	return seList
+		
+def Download(stream, savePath, titleCapitulo):
+	i=0
+	while i<len(stream):
+                n=str(i)
+                dl='youtube-dl -o "'+savePath+'/'+titleCapitulo+' '+n+'.mp4''"'+' '+stream[i].url
+                er=os.system(dl)
+                if er==0:
+                        i=len(stream)
+                else:
+                        i+=1
+
+def DisplayResult(results):
+	while True:
+		Clear()
+		print (version)
+		print ('Compruebe la serie que desea Descargar: ')
+		for busque in results:
+			n=str(busque.num)
+			print ('[',n,']',busque.name)
+		choice=input('\n Introduzca el numero de la serie a descargar el ultimo capitulo: ')
+		if choice.isdigit()==True:
+			choice=int(choice)
+			if choice>=len(results):
+				print ('[!] Error!. El numero no esta en la lista.')
+				input()
+			else:
+				return choice
+		else:
+			print ('[!]Error! Introduzca un numerc.')
+			input()
+			
+
+#Función Principal
+def main():
+	
+	#Mostrar Series Encontradas
+	busque=SearchEngine()
+	choice=DisplayResult(busque)
+	#Mostrar Servidores de Descarga
+	title=busque[choice].name
+	servi=GetEpisodes(busque[choice].url)
+	titleCapitulo=servi[0].namecap
+	#Ubicacion de Descarga 	
+	path=os.environ['HOME']+'/.Anime'
+	#Nombre Carpeta
+	if not os.path.exists(path):
+		os.mkdir(path)
+	folderName = title
+	savePath = os.path.join(path, folderName)
+	if not os.path.exists(savePath):
+		os.mkdir(savePath)
+	descarga=Download(servi, savePath, titleCapitulo)
+	
+	
+if __name__=="__main__":
+		while True:
+				main()
+		

@@ -1,0 +1,219 @@
+#!/usr/bin/python3
+# -*- coding: UTF-8 -*-
+from lxml import html
+import os
+import requests
+from urllib import parse
+#version en la pantalla
+version='AnimeFLV Busqueda 0.1 \n'
+
+class Episode:
+	def __init__(self, name, num, url, ncap):
+		self.name=name
+		self.num=num
+		self.url=url
+		self.ncap=ncap			
+class Anime:
+	def __init__(self, name, url, num):
+		self.name=name
+		self.url=url
+		self.num=num
+class Servidor:
+	def __init__(self, url, num, name, epNames):
+		self.url=url
+		self.num=num
+		self.name=name
+		self.epNames=epNames					
+def Clear():
+	if os.name=="posix":
+		os.system('clear')
+	else:
+		os.system('cls')
+	return		
+def GetUrl(Url):
+	try:
+		page=requests.get(Url)
+	except:
+		print ("[!] Error al Conectar!")
+		return False
+	page=html.fromstring(page.content)
+	return page
+
+	# función para los capítulos
+def GetAllCap(url,title):
+	path=os.environ['HOME']+'/.Anime'
+	#Nombre Carpeta
+	if not os.path.exists(path):
+		os.mkdir(path)
+	savePath = os.path.join(path, title)
+	if not os.path.exists(savePath):
+		os.mkdir(savePath)
+	url="https://www.animeflv.net"+url
+	page=GetUrl(url)
+	capLinks=page.xpath('//li[@class="fa-play-circle"]/a/@href')
+	#revisar links 
+	linkca=len(capLinks)
+	for n in range(0,linkca):
+		url="https://www.animeflv.net"+capLinks[n]
+		page=GetUrl(url)
+		titleCapitulo= page.xpath('//div/h1/text()')
+		dl='youtube-dl -o "'+savePath+'/'+titleCapitulo[0]+'.mp4''"'+' '+url
+		er=os.system(dl)
+		if er==0:
+			os.system('notify-send "Terminado '+titleCapitulo[0]+'"')
+		else:
+			os.system('notify-send "Error al descargar '+titleCapitulo[0]+'"')	
+def GetEpisodes(url):
+	url="https://www.animeflv.net"+url
+	page=GetUrl(url)
+	capLinks=page.xpath('//li[@class="fa-play-circle"]/a/@href')
+	epNames=page.xpath('//li[@class="fa-play-circle"]/a/h3/text()')
+	ncap=page.xpath('//li[@class="fa-play-circle"]/a/p/text()')
+
+	#revisar links 
+	linkca=len(capLinks)
+	if linkca!=len(epNames):
+		print ('[!] Error. Enlaces Desaparecidos')
+		return False
+	#Crear lista Capitulos
+	capitulosList=[]
+	for n in range(0, linkca):
+		episode=Episode(epNames[n], n, capLinks[n], ncap[n])
+		capitulosList.append(episode)
+	return capitulosList
+def SearchEngine(search):
+	searchUrl='https://www.animeflv.net/browse?q='
+	search=parse.quote(search)
+	user_agent  =  'Mozilla / 5.0 (Windows NT 6.1; Win64; x64)'
+	header={ 'User-Agent' :  user_agent }
+	page=GetUrl(searchUrl+search)
+	animeLinks=page.xpath('//div[@class="Description"]/a/@href')
+	animeNames=page.xpath('//div[@class="Description"]/div/strong/text()')
+
+	# Revisar los Enlaces
+	linkNum=len(animeLinks)
+	if linkNum!=len(animeNames):
+		print ('[!] Error Faltan Enlaces!')
+		return False
+	# Crear lista Anime
+	animeList=[]
+	for n in range(0, linkNum):
+		anime=Anime(animeNames[n],animeLinks[n], n)
+		animeList.append(anime)
+	return animeList	
+def SearchInput():
+	while True:
+		print (version)
+		search=input('Introduzca su Búsqueda: \n')
+		bus = SearchEngine(search)
+		
+		if bus != []:
+			return bus
+		else:
+			print ('[!]No se encontró, Por favor presione ENTER para re intentar')
+			input()
+def GetServidor(url):
+	url="https://www.animeflv.net"+url
+	page=GetUrl(url)
+	rawLinks = page.xpath('//table[@class="RTbl Dwnl"]/tbody/tr/td/a/@href')
+	epNames = page.xpath('//div/h1/text()')
+	seNames=page.xpath('//table[@class="RTbl Dwnl"]/tbody/tr/td/strong/text()')
+
+	linkse=len(rawLinks)
+	if linkse!=len(seNames):
+		print ('[!] Error Faltan Enlaces!')
+		return False
+	
+	 #Crear lista Servidor
+	seList=[]
+	for n in range(0, linkse):
+		linkDescarga=rawLinks[n].replace('http://ouo.io/s/y0d65LCP?s=', '')
+		urldeco=parse.unquote(linkDescarga)
+		servidor=Servidor(urldeco, n, seNames[n], epNames[0])
+		seList.append(servidor)
+	return seList		
+def DisplayResult(results):
+	while True:
+		print (version)
+		print ('Compruebe el anime que desea Descargar: ') 
+		for bus in results:
+			n=str(bus.num)
+			print ('[',n,']',bus.name)
+		choice=input('\n Introduzca el Numero del Anime a Descargar: ')
+		if choice.isdigit():
+			choice=int(choice)
+			if choice>=len(results):
+				print ('[!] Error!. El numero no esta en la lista.')
+				input()
+			else:
+				return choice
+		else:
+			print ('[!]Error! Introduzca un Numero')
+			input()
+def DisplayCapitulos(results):
+		while True:
+			print (version)
+			print ('seleccione los capítulos a descargar: ') 
+			for capitulo in results:
+				n=str(capitulo.num)
+				print ('[',n,']',capitulo.name,capitulo.ncap)
+			choice=input('\n Introduzca el Numero de capitulo a Descargar: ')
+			if choice.isdigit():
+				choice=int(choice)
+				if choice>=len(results):
+					print ('[!] Error!. El numero no esta en la lista.')
+					input()
+				else:
+					return choice
+	
+			else:
+				print ('[!]Error! Introduzca un Numero')
+				input()
+
+def main():
+	Clear()
+	#Pantalla de menú Búsqueda
+	busque=SearchInput()
+	#Mostrar Series Encontradas
+	choice=DisplayResult(busque)
+	title = busque[choice].name
+	while True:
+		cd=input('\n[0] Descargar Todos los Capítulos: \n[1] Seleccionar Capitulo a Descargar: \n Introduzca la opción: ')
+		if cd.isdigit():
+			cd=int(cd)
+			if cd>=2:
+				print('[!] Error! El numero no esta en la lista. ')
+				input()
+			else:
+				print('Buscando capítulos...\n')
+				if cd==1:
+					capitulo=GetEpisodes(busque[choice].url)
+					cap=DisplayCapitulos(capitulo)
+					#servi=GetServidor(capitulo[cap].url)
+					titleCapitulo= capitulo[cap].ncap
+					path=os.environ['HOME']+'/.Anime'
+					if not os.path.exists(path):
+						os.mkdir(path)	
+					savePath = os.path.join(path, title)
+					if not os.path.exists(savePath):
+						os.mkdir(savePath)
+					dl='youtube-dl -o "'+savePath+'/'+title+' '+titleCapitulo+'.mp4''"'+' https://www.animeflv.net'+capitulo[cap].url
+					er=os.system(dl)
+					if er==0:
+						os.system('notify-send "Terminado '+title+' '+titleCapitulo+'"')
+					else:
+						os.system('notify-send "Error al descargar '+title+' '+titleCapitulo+'"')
+					return cd
+				else:
+					capall=GetAllCap(busque[choice].url, title)
+					return cd
+				
+		else:
+			print('[!]Error! Introduzca un Numero')
+			input()
+			
+	
+	
+if __name__=="__main__":
+		while True:
+				main()

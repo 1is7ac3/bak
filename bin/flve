@@ -1,0 +1,108 @@
+#!/usr/bin/python3
+# -*- coding: UTF-8 -*-
+
+from lxml import html
+import os
+import requests
+from urllib import parse
+
+#version en la pantalla
+version='AnimeFLV Emisión 0.1 \n'
+
+class Episode:
+	def __init__(self, name, num, url):
+		self.name=name
+		self.num=num
+		self.url=url
+		
+class Anime:
+	def __init__(self, name, url, num, ncap):
+		self.name=name
+		self.url=url
+		self.num=num
+		self.ncap=ncap
+			
+def Clear():
+	if os.name=="posix":
+		os.system('clear')
+	else:
+		os.system('cls')
+	return
+		
+def GetUrl(Url):
+	try:
+		page=requests.get(Url)
+	except:
+		print ("[!] Error al Conectar!")
+		return False
+	page=html.fromstring(page.content)
+	return page
+			
+			
+	# Realiza la busque da en la pagina de los enlaces
+def SearchEngine():
+	searchUrl='https://www.animeflv.net'
+	page=GetUrl(searchUrl)
+	animeLinks=page.xpath('//main/ul/li/a/@href')
+	animeNames=page.xpath('//main/ul/li/a/span/img/@alt')
+	capNro=page.xpath('//main/ul/li/a/span/text()')			
+	# Revisar los Enlaces
+	
+	linkNum=len(animeLinks)
+	if linkNum!=len(animeNames):
+		print ('[!] Error Faltan Enlaces!')
+		return False
+	# Crear lista Anime
+	animeList=[]
+	for n in range(0, linkNum):
+		anime=Anime(animeNames[n],animeLinks[n], n, capNro[n])
+		animeList.append(anime)
+	return animeList
+				
+def DisplayResult(results):
+	while True:
+		print (version)
+		print ('Compruebe el anime que desea Descargar: ')
+		for busque in results:
+			n=str(busque.num)
+			print ('['+n+']'+busque.name +" "+busque.ncap)
+		choice=input('\n Introduzca el Numero del Anime a Descargar el Ultimo Capitulo ')
+		if choice.isdigit():
+			choice=int(choice)
+			if choice>=len(results):
+				print ('[!] Error!. El numero no esta en la lista.')
+				input()
+			else:
+				return choice
+		else:
+			print ('[!]Error! Introduzca un Numero')
+			input()
+			
+def Descargar(url, savePath,title, titleCapitulo):
+	url="https://www.animeflv.net"+url
+	dl='youtube-dl -o "'+savePath+'/'+title+' '+titleCapitulo+'.mp4''"'+' '+url
+	er=os.system(dl)
+	if er==0:
+		os.system('notify-send "Terminado '+title+' '+titleCapitulo+'"')
+	else:
+		os.system('notify-send "Error al descargar '+title+' '+titleCapitulo+'"')
+
+# Función Principal
+def main():
+	#Pantalla de menú Búsqueda
+	busque=SearchEngine()
+	#Mostrar Series Encontradas
+	choice=DisplayResult(busque)
+	title = busque[choice].name
+	titleCapitulo= busque[choice].ncap
+	path=os.environ['HOME']+'/.Anime'
+	if not os.path.exists(path):
+		os.mkdir(path)
+	savePath = os.path.join(path, title)
+	if not os.path.exists(savePath):
+		os.mkdir(savePath)
+	Descargar(busque[choice].url, savePath,title,titleCapitulo)	
+	
+if __name__=="__main__":
+		while True:
+				main()
