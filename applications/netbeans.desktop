@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Development;IDE
+Comment[es_ES]=IDE
+Comment=IDE
+Icon=/home/maloqui/Descargas/Linux/netbeans/nb/netbeans.png
+MimeType=
+Name[es_ES]=Netbeans
+Name=Netbeans
+Exec=netbeans
+Type=Application
