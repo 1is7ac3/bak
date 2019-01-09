@@ -1,0 +1,21 @@
+[Desktop Entry]
+Categories=Office;
+Comment[es_VE]=Crea atractivos documentos, trabaja fácilmente con otras personas y disfruta de la lectura.
+Comment=Crea atractivos documentos, trabaja fácilmente con otras personas y disfruta de la lectura.
+Exec=wine 'C:\\Program Files/Microsoft Office/Office16/WINWORD.EXE'
+GenericName[es_VE]=
+GenericName=
+Icon=1DAC_wordicon.0
+MimeType=
+Name[es_VE]=Word 2016
+Name=Word 2016
+Path=
+StartupNotify=true
+StartupWMClass=winword.exe
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

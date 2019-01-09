@@ -1,0 +1,21 @@
+[Desktop Entry]
+Categories=Office;
+Comment[es_VE]=Descubre, visualiza y comparte información fácilmente a partir de tus datos.
+Comment=Descubre, visualiza y comparte información fácilmente a partir de tus datos.
+Exec=wine 'C:\\Program Files/Microsoft Office/Office16/EXCEL.EXE'
+GenericName[es_VE]=
+GenericName=
+Icon=316D_xlicons.0
+MimeType=
+Name[es_VE]=Excel 2016
+Name=Excel 2016
+Path=
+StartupNotify=true
+StartupWMClass=excel.exe
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=
