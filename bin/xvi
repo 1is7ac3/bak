@@ -1,2 +1,2 @@
 #!/bin/bash
-vi srcpkg/$1/template 
+vi srcpkgs/$1/template 
