@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Microsoft Excel
+MimeType=application/vnd.ms-excel;
+Exec=env WINEPREFIX="/home/1is7ac3/.wine" wine start /ProgIDOpen Excel.XLL %f
+NoDisplay=true
+StartupNotify=true
+Icon=850A_EXCEL.0
