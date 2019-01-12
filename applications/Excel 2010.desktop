@@ -2,13 +2,13 @@
 Categories=Office;
 Comment[es_VE]=Descubre, visualiza y comparte información fácilmente a partir de tus datos.
 Comment=Descubre, visualiza y comparte información fácilmente a partir de tus datos.
-Exec=wine 'C:\\Program Files/Microsoft Office/Office16/EXCEL.EXE'
+Exec=wine 'C:\\Program Files/Microsoft Office/Office14/EXCEL.EXE' %F
 GenericName[es_VE]=
 GenericName=
 Icon=316D_xlicons.0
 MimeType=
-Name[es_VE]=Excel 2016
-Name=Excel 2016
+Name[es_VE]=Excel 2010
+Name=Excel 2010
 Path=
 StartupNotify=true
 StartupWMClass=excel.exe
