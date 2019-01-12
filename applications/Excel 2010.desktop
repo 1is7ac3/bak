@@ -2,7 +2,7 @@
 Categories=Office;
 Comment[es_VE]=Descubre, visualiza y comparte información fácilmente a partir de tus datos.
 Comment=Descubre, visualiza y comparte información fácilmente a partir de tus datos.
-Exec=wine 'C:\\Program Files/Microsoft Office/Office14/EXCEL.EXE' %F
+Exec=env wine 'C:\\Program Files/Microsoft Office/Office14/EXCEL.EXE' %F
 GenericName[es_VE]=
 GenericName=
 Icon=316D_xlicons.0

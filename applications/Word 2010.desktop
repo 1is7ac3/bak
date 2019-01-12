@@ -2,7 +2,7 @@
 Categories=Office;
 Comment[es_VE]=Crea atractivos documentos, trabaja fácilmente con otras personas y disfruta de la lectura.
 Comment=Crea atractivos documentos, trabaja fácilmente con otras personas y disfruta de la lectura.
-Exec=wine 'C:\\Program Files/Microsoft Office/Office14/WINWORD.EXE' %F
+Exec=env wine 'C:\\Program Files/Microsoft Office/Office14/WINWORD.EXE' %F
 GenericName[es_VE]=
 GenericName=
 Icon=1DAC_wordicon.0
