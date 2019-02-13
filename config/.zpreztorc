@@ -23,12 +23,9 @@ zstyle ':prezto:*:*' color 'yes'
 # Set the Prezto modules to load (browse modules).
 # The order matters.
 zstyle ':prezto:load' pmodule \
-  'utility' \
   'history' \
   'directory' \
-  'ssh' \
   'completion' \
-  'syntax-highlighting' \
   'autosuggestions' \
   'prompt'
 ##
@@ -169,10 +166,10 @@ zstyle ':prezto:module:terminal:multiplexer-title' format '%u %s'
 # before deleting or overwriting files. Set to 'no' to disable this safer
 # behavior.
 # zstyle ':prezto:module:utility' safe-ops 'yes'
-alias ud='_ xbps-install -Suy'
-alias de='_ xbps-remove -R'
-alias i='_ xbps-install'
-alias re='_ xbps-remove -o'
+alias ud='sudo xbps-install -Suy'
+alias de='sudo xbps-remove -R'
+alias i='sudo xbps-install'
+alias re='sudo xbps-remove -o'
 alias dl='youtube-dl'
 alias mp3='youtube-dl -x --audio-format mp3 -o "~/Música/%(title)s.%(ext)s"'
 alias sefil='xbps-query -Ro'
