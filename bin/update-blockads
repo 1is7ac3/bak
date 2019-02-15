@@ -1,0 +1,12 @@
+#!/bin/zsh
+ping -c 3 google.com
+i="$?"
+while test $i -eq "0"
+do
+  aria2c https://github.com/StevenBlack/hosts/raw/master/hosts -d /tmp
+  if test $? -eq "0"
+  then
+    mv -f /tmp/hosts /etc/hosts
+    break
+  fi
+done
