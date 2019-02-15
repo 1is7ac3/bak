@@ -1,0 +1,3 @@
+#!/bin/sh
+# A script to run PlanMaker.
+/home/1is7ac3/Git/freeoffice/planmaker "$@"
