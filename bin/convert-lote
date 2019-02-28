@@ -1,0 +1,5 @@
+#!/bin/zsh
+for i in *."${1}"
+do
+	convert "${i}" -quality 80 "${i%.*}.${2}"
+done
