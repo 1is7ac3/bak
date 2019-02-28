@@ -1,0 +1,24 @@
+#!/bin/zsh
+export DISPLAY=:0.0
+if [[ "${1}" == "start" ]];
+  then
+  notify-send "loading redshift"
+  #kill $(cat /tmp/PIDREDSHIFT)
+  #rm /tmp/PIDREDSHIFT
+  kill redshift
+  xbacklight -set 0%
+  redshift &
+  #echo $! > /tmp/PIDREDSHIFT
+  notify-send "redshift ready"
+elif [[ "$1" == "stop" ]];
+  then
+  xbacklight -set 100%
+  #kill $(cat /tmp/PIDREDSHIFT)
+  kill redshift
+  #rm /tmp/PIDREDSHIFT
+else
+  echo "usage: redshift-cron [OPTIONS]"
+  echo " "
+  echo "start : start redshift"
+  echo "stop : end redshift"
+fi
