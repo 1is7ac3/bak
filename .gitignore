@@ -1,3 +1,5 @@
 *.swo
 *.swp
 applications/mimeinfo.cache
+applications/defaults.list
+applications/mimeapps.list

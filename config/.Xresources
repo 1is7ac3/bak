@@ -1,5 +1,6 @@
 Xcursor.theme: Win-8.1-S
 Xcursor.size:16
+Xft:Hack:size=10
 Xft.autohint: 0
 Xft.lcdfilter: lcddefault
 Xft.hintstyle: hintslight
@@ -7,3 +8,6 @@ Xft.hinting: 1
 Xft.antialias: 1
 Xft.rgba: rgb
 Xft.dpi: 96
+! DarkYellow + Yellow
+*color3:  #eab93d
+*color11: #ffc123
