@@ -1,0 +1,6 @@
+export TERM="xterm-256color"
+source ~/.prezto/init.zsh
+alias i='sudo xbps-install -S'
+alias re='sudo xbps-remove -Ro'
+alias up='sudo xbps-install -Syu'
+alias se='xbps-query -Rs'
