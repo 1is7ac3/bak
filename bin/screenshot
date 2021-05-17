@@ -1,4 +1,0 @@
-#!/bin/zsh
-folder=~/Imágenes/$(date '+%d-%m-%Y')
-mkdir -p $folder
-xfce4-screenshooter $1 -s $folder
