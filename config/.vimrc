@@ -1,9 +1,0 @@
-set number
-syntax on
-set encoding=utf-8
-set textwidth=79
-set expandtab
-set autoindent
-set fileformat=unix
-set splitbelow
-set splitright
