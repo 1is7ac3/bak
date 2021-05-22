@@ -23,6 +23,7 @@
 import os
 from lxml import html
 import requests
+import datetime
 # version en la pantalla
 version = 'JKN 17.05.21 \n'
 
@@ -56,8 +57,16 @@ def Clear():
 
 
 def GetUrl(Url):
-    page = requests.get(Url)
-    page = html.fromstring(page.content)
+    try:
+        page = requests.get(Url)
+        if page.status_code == 200:
+            page = page.content.decode('utf-8')
+        else:
+            raise ValueError(f'Error: {page.status_code}')
+    except ValueError as ve:
+        print(ve)
+        return False
+    page = html.fromstring(page)
     return page
 
 
@@ -119,8 +128,10 @@ def Download(stream, savePath, titleCapitulo):
 
 def DisplayResult(results):
     while True:
+        today = datetime.datetime.today().strftime('%H:%M del %d-%m-%Y')
         Clear()
         print(version)
+        print(f'Hora de actualizacion: {today}')
         print('Compruebe la serie que desea Descargar: ')
         for busque in results:
             n = str(busque.num)
