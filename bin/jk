@@ -164,15 +164,12 @@ def GetAllCap(url, title):
     # se extrae los datos del numero de paginas
     pageLink = page.xpath('//a[@class="numbers"]/text()')
     # Se obtiene el numero de paginas
-    linkpa = len(pageLink)
-    # Obtener el numero del primer capitulo de la ultima pagina
-    ini = str(((linkpa - 1) * 10) + 1)
+    ini = len(pageLink[0]) - 1
+    linknro = len(pageLink) - 1
     # Variable que almacena el texto de la ultima pagina ej:21 - 24
-    exac = pageLink[linkpa-1].replace(ini + ' - ', '')
-    # Obtener cuantos capítulos tiene la serie.
-    ran = int(exac)
+    exac = pageLink[linknro][ini:]
     # Ciclo para descarga delos capítulos
-    for n in range(1, (ran+1)):
+    for n in range(1, (int(exac) + 1)):
         # Variable donde se convierte en texto para ser usado en la url
         capi = str(n)
         # Se une la url con el numero del capitulo a descargar
@@ -180,16 +177,10 @@ def GetAllCap(url, title):
         # Verifica estado de la url
         page = GetUrl(url2)
         # Extrae el enlace de descarga
-        rawLinks = page.xpath('//script/text()')
+        rawLinks = page.xpath('//script[contains(., "video")]/text()')
         # Extrae el nombre del capitulo
         epNames = page.xpath('//div[@class="breadcrumb__links"]/h1/text()')
-        # Extrae el nombre del servidor de descarga
-        # seNames = page.xpath('//ul[@class="server-tab"]//a/text()')
-        # Verifica que coincida el numero de enlaces
-        for i in rawLinks:
-            if 'video' in i:
-                rawLinks = i
-        rawLinks = rawLinks.split('src="')
+        rawLinks = rawLinks[0].split('src="')
         for i in rawLinks:
             if 'jk.php?u=' in i:
                 steam = i

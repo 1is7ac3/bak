@@ -90,12 +90,9 @@ def SearchEngine():
 
 def GetEpisodes(url):
     page = GetUrl(url)
-    rawLinks = page.xpath('//script/text()')
+    rawLinks = page.xpath('//script[contains(., "video")]/text()')
     epNames = page.xpath('//div[@class="breadcrumb__links"]/h1/text()')
-    for i in rawLinks:
-        if 'video' in i:
-            rawLinks = i
-    rawLinks = rawLinks.split('src="')
+    rawLinks = rawLinks[0].split('src="')
     for i in rawLinks:
         if 'jk.php?u=' in i:
             steam = i
