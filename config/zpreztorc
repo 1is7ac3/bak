@@ -4,12 +4,10 @@ zstyle ':prezto:module:utility:ls' color 'auto'
 zstyle ':prezto:load' pmodule \
   'environment' \
   'alias-tips' \
-  'check-deps' \
   'colored-man-pages' \
   'fasd' \
   'terminal' \
   'material-colors' \
-  'colorize' \
   'ssh' \
   'git' \
   'history' \
@@ -34,3 +32,7 @@ zstyle ':prezto:module:syntax-highlighting' highlighters \
    'root'
 zstyle ':prezto:module:syntax-highlighting' pattern \
   'rm*-rf*' 'fg=white,bold,bg=red'
+zstyle ':prezto:module:completion:*:hosts' etc-host-ignores \
+  '0.0.0.0' '127.0.0.1'
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)

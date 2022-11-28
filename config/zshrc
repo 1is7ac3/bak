@@ -1,7 +1,56 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-alias ls='lsd'
+
 export TERM="xterm-256color"
-source ~/.prezto/init.zsh
+
+if ! [[ -e ~/.zprezto ]]; then
+	git clone --recursive https://github.com/sorin-ionescu/prezto.git ~/.zprezto
+fi
+if [[ -s ~/.zprezto/init.zsh ]]; then
+  source ~/.zprezto/init.zsh
+fi
+
+#command_not_found_handler () {
+#    local PKG="${1}"
+#
+#    if which xlocate 1>/dev/null 2>/dev/null; then
+#    local POSSIBLE_PKGS="$(xlocate bin/${PKG})"
+#     [[ -z "${POSSIBLE_PKGS}" ]] && return 127
+#              
+#    echo "paquetes con ${PKG}:"
+#    echo "${POSSIBLE_PKGS}"
+#    fi
+#}
+
+command_not_found_handler (){
+    local purple='\e[1;35m' bright='\e[0;1m' green='\e[1;32m' reset='\e[0m'
+    printf 'zsh: comando no encontrado: %s\n' "$1"
+    local entries=(
+        ${(f)"$(/usr/bin/pacman -F --machinereadable -- "/usr/bin/$1")"}
+    )
+    if (( ${#entries[@]} ))
+    then
+        printf "${bright}$1${reset} se puede encontrar en los siguientes paquetes:\n"
+        local pkg
+        for entry in "${entries[@]}"
+        do
+            # (repo package version file)
+            local fields=(
+                ${(0)entry}
+            )
+            if [[ "$pkg" != "${fields[2]}" ]]
+            then
+                printf "${purple}%s/${bright}%s ${green}%s${reset}\n" "${fields[1]}" "${fields[2]}" "${fields[3]}"
+            fi
+            printf '    /%s\n' "${fields}"
+            pkg="${fields[2]}"
+        done
+    fi
+    return 127
+}
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

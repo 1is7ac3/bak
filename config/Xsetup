@@ -1,0 +1,5 @@
+#!/bin/sh
+xrandr --setprovideroutputsource modesetting NVIDIA-0
+xrandr --auto
+xinput list |grep Transla | awk -F "=" '{print $2}' | awk -F " " '{print $1}' | xargs xinput float
+#xrandr --dpi 120
