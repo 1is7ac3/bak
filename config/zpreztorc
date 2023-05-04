@@ -38,8 +38,9 @@ zstyle ':prezto:load' pmodule \
   'utility' \
   'completion' \
   'history-substring-search' \
-  'fast-syntax-highlighting' \
+  'syntax-highlighting' \
   'autosuggestions' \
+  'command-not-found' \
   'prompt'
 #
 # Autosuggestions
