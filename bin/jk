@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 #
-#  JK
+#  Animeflv
 #
 #  Copyright 2017 1is7ac3 <isaac.qa13@gmail.com>
 #  Autor: Isaac Quiroz
@@ -24,8 +24,9 @@ import requests
 import os
 from lxml import html
 import datetime
+import jkn
 # Imprimir versión
-version = 'JK 17.05.21\n'
+version = 'FLV 09.10.23\n'
 
 
 # Clase Serie
@@ -90,14 +91,14 @@ def SearchInput():
 # función de búsqueda
 def SearchEngine(search):
     # Une el nombre de la búsqueda con la pagina
-    searchUrl = 'http://jkanime.net/buscar/'+search
+    searchUrl = 'https://animeflv.net/browse?q='+search
     print(f'Estamos realizando la busqueda de {search} en la pagina.\n')
     # Se revisa el estado de la pagina
     page = GetUrl(searchUrl)
     # Captura los enlaces de las diez primeras series
-    Links = page.xpath('//div[@class="anime__item"]/a/@href')
+    Links = page.xpath('//article[@class="Anime alt B"]/a/@href')
     # Captura el nombre de las series desde la pagina web
-    Names = page.xpath('//div[@class="anime__item__text"]/h5/a/text()')
+    Names = page.xpath('//article[@class="Anime alt B"]//h3/text()')
     # Revisa que los nombres coincidan en numero con los enlaces
     linkNum = len(Links)
     if linkNum != len(Names):
@@ -112,92 +113,62 @@ def SearchEngine(search):
         serieList.append(serie)
     return serieList
 
-
-# Función para mostrar los resultados
-def ShowResult(results):
-    # Ciclo por si se introduce un dato erróneo
-    while True:
-        Clear()
-        # Imprime versión de la app
-        today = datetime.datetime.today().strftime('%H:%M del %d-%m-%Y')
-        print(version)
-        print(f'La Hora de actualizacion de la pagina fue a las {today}')
-        # Imprime Instrucciones
-        print('Seleccione el numero de la serie que desea descargar:\n')
-        # Ciclo para imprimir todos los resultados
-        for bus in results:
-            n = str(bus.num)
-            print(f'[ {n} ] {bus.name}')
-        # Imprime información y captura el numero a usar
-        choice = input('\n Introduzca el numero de la serie a Descargar: ')
-        # Comprueba si el dato entrante es un numero
-        if choice.isdigit():
-            # si es un numero convierte la variable en un entero
-            choice = int(choice)
-            # Compara que el entero introducido este en la lista impresa
-            if choice >= len(results):
-                print('\n[!] Error!. El numero no esta en la lista.')
-            else:
-                return choice
-        else:
-            print('\n[!]Error! Introduzca un Numero.')
-
-
 # Función para descargar todos los capítulos
 def GetAllCap(url, title):
     # Imprime versión
     print(version)
+    urlFlv = 'https://animeflv.net'
     # Se obtiene nombre de usuario
     # Se crea variable con la dirección donde se va a guardar
-    path = os.environ['HOME'] + '/.Anime'
-    if not os.path.exists(path):
-        os.mkdir(path)
+    #path = os.environ['HOME'] + '/.Anime'
+    #if not os.path.exists(path):
+    #    os.mkdir(path)
     # Nombre de carpeta
-    folderName = title
+    #folderName = title
     # se unen la ruta de descarga con la carpeta
-    savePath = os.path.join(path, folderName)
+    #savePath = os.path.join(path, folderName)
     # Se crea la capeta si no se existe
-    if not os.path.exists(savePath):
-        os.mkdir(savePath)
+    #if not os.path.exists(savePath):
+    #    os.mkdir(savePath)
     # Se verifica la url de los capítulos
-    page = GetUrl(url)
+    page = GetUrl(urlFlv + url)
     # se extrae los datos del numero de paginas
-    pageLink = page.xpath('//a[@class="numbers"]/text()')
-    # Se obtiene el numero de paginas
-    ini = len(pageLink[0]) - 1
-    linknro = len(pageLink) - 1
-    # Variable que almacena el texto de la ultima pagina ej:21 - 24
-    exac = pageLink[linknro][ini:]
+    pageLinks = page.xpath('//script[contains(., "[[")]/text()')
+    pageLinks = pageLinks[0].split('= [[')
+    pageLinks = pageLinks[1].split(',')
+    i = int(input('Desde que capitulo desea iniciar: '))
     # Ciclo para descarga delos capítulos
-    for n in range(1, (int(exac) + 1)):
+    for n in range(i, int(pageLinks[0])):
         # Variable donde se convierte en texto para ser usado en la url
-        capi = str(n)
         # Se une la url con el numero del capitulo a descargar
-        url2 = url + capi
+        url2 = '/ver' + url.replace('/anime','') + '-' + str(n)
+        print(url2)
+        linkVideos = jkn.GetEpisodesLink(url2)
+        jkn.streaming(linkVideos)
         # Verifica estado de la url
-        page = GetUrl(url2)
+        #page = GetUrl(url2)
         # Extrae el enlace de descarga
-        rawLinks = page.xpath('//script[contains(., "video")]/text()')
+        #rawLinks = page.xpath('//script[contains(., "video")]/text()')
         # Extrae el nombre del capitulo
-        epNames = page.xpath('//div[@class="breadcrumb__links"]/h1/text()')
-        rawLinks = rawLinks[0].split('src="')
-        for i in rawLinks:
-            if 'jk.php?u=' in i:
-                steam = i
-            elif 'jkokru.php?u=' in i:
-                okru = i
-        steam = steam.split('" width')
-        okru = okru.split('" width')
-        seList = []
-        servidor = Servidor(steam[0].replace('jk.php?u=', ''), epNames[0])
-        seList.append(servidor)
-        servidor2 = Servidor(okru[0].replace(
-            'https://jkanime.net/jkokru.php?u=', 'https://ok.ru/videoembed/'),
-            epNames[0])
-        seList.append(servidor2)
-        saveFile = os.path.join(savePath, seList[0].namecap)
+        #epNames = page.xpath('//div[@class="breadcrumb__links"]/h1/text()')
+        #rawLinks = rawLinks[0].split('src="')
+        #for i in rawLinks:
+        #    if 'jk.php?u=' in i:
+         #       steam = i
+         #   elif 'jkokru.php?u=' in i:
+         #       okru = i
+        #steam = steam.split('" width')
+        #okru = okru.split('" width')
+        #seList = []
+        #servidor = Servidor(steam[0].replace('jk.php?u=', ''), epNames[0])
+        #seList.append(servidor)
+        #servidor2 = Servidor(okru[0].replace(
+        #    'https://jkanime.net/jkokru.php?u=', 'https://ok.ru/videoembed/'),
+        #    epNames[0])
+        #seList.append(servidor2)
+        #saveFile = os.path.join(savePath, seList[0].namecap)
         # lanza función download
-        Download(seList, saveFile)
+        #Download(seList, saveFile)
 
 
 def Download(capitulo, saveFile):
@@ -221,7 +192,7 @@ def main():
     # Llama la función para la entrada de la búsqueda
     buscar = SearchInput()
     # Llama la función para mostrar resultado de la búsqueda
-    choice = ShowResult(buscar)
+    choice = jkn.DisplayResult(buscar)
     # Obtiene nombre de la serie para la carpeta
     title = buscar[choice].name
     # Llama la función para descargar todo los capítulos
