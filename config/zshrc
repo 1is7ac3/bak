@@ -27,10 +27,11 @@ compinit
 #	dnf provides /bin/$1 \$
 #}
 alias i='sudo dnf install '
-alias ud='sudo dnf distro-sync'
+alias ud='sudo dnf --refresh distro-sync'
 alias de='sudo dnf remove'
 alias se='dnf search'
 alias re='sudo dnf autoremove'
+#alias dnf='dnf5'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 #neofetch
