@@ -28,10 +28,10 @@ command_not_found_handler (){
 }
 alias i='sudo pacman -S'
 alias ud='sudo pacman -Syu'
-alias de='sudo pacman -Rsuc'
+alias de='sudo pacman -Rscn'
 alias se='pacman -Ss'
 alias udf='sudo pacman -Fy'
-alias autoremove='pacman -Qtdq | sudo pacman -Rns -'
+alias sef='pacman -Fx'
+alias autoremove='sudo pacman -Rsn $(pacman -Qdtq)'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-#neofetch
