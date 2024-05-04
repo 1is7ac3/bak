@@ -24,14 +24,13 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 autoload -Uz compinit
 compinit
 command_not_found_handler (){
-	  pacman -Fx /bin/$1\$
+	  dnf provides /bin/$1 \$
 }
-alias i='sudo pacman -S'
-alias ud='sudo pacman -Syu'
-alias de='sudo pacman -Rscn'
-alias se='pacman -Ss'
-alias udf='sudo pacman -Fy'
-alias sef='pacman -Fx'
-alias autoremove='sudo pacman -Rsn $(pacman -Qdtq)'
+alias i='sudo dnf install'
+alias ud='sudo dnf distro-sync'
+alias de='sudo dnf remove'
+alias se='dnf list'
+alias sef='dnf provides'
+alias autoremove='sudo dnf autoremove'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
