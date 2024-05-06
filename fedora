@@ -1,0 +1,40 @@
+#!/bin/sh
+printf "%s" "
+defaultyes=True
+fastestmirror=True
+max_parallel_downloads=20
+
+" | sudo tee -a /etc/dnf/dnf.conf
+
+sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm 
+
+sudo dnf group update core
+
+sudo dnf upgrade
+
+sudo dnf remove anaconda\* zd1211-firmware atmel-firmware libertas-usb8388-firmware abrt\* bluez-cups alsa-sof-firmware boost-date-time orca fedora-bookmarks mailcap open-vm-tools samba-client libreswan unbound-libs podman yajl nano nano-default-editor thermald sos kpartx dos2unix sssd cyrus-sasl-plain geolite2\* traceroute ModemManager tcpdump mozilla-filesystem nmap-ncat spice-vdagent adcli mtr realmd teamd vpnc openconnect openvpn ppp pptp rsync xorg-x11-drv-vmware hyperv\* virtualbox-guest-additions qemu-guest-agent dnfdragora akregator kmail korganizer kamoso kwrite konversation krdc kmouth krfb kcalc kcharselect kgpg kamera kfind media-player-info plasma-discover
+
+sudo dnf autoremove -y
+sudo fwupdmgr get-devices
+sudo fwupdmgr refresh --force
+sudo fwupdmgr get-updates -y
+sudo fwupdmgr update -y
+
+sudo fedora-third-party enable
+sudo fedora-third-party refresh
+
+sudo dnf install vim-default-editor zsh-autosuggestions zsh-syntax-highlighting ffmpeg akmod-v4l2loopback yt-dlp --best --allowerasing
+
+sudo dnf group install Multimedia
+
+sudo dnf swap mesa-va-drivers mesa-va-drivers-freeworld
+
+sudo dnf install gcc kernel-headers kernel-devel akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs xorg-x11-drv-nvidia-libs.i686
+
+sudo dnf install xrandr
+
+sudo cp -p /usr/share/X11/xorg.conf.d/nvidia.conf /etc/X11/xorg.conf.d/nvidia.conf
+
+
+
+
