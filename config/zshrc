@@ -28,8 +28,8 @@ compinit
 command_not_found_handler (){
 	  dnf provides /bin/$1 \$
 }
-alias i='sudo dnf install'
-alias ud='sudo dnf distro-sync'
+alias i='sudo dnf --refresh install'
+alias ud='sudo dnf --refresh upgrade && sudo dnf --refresh distro-sync'
 alias de='sudo dnf remove'
 alias se='dnf list'
 alias sef='dnf provides'
