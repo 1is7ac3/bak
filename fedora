@@ -4,20 +4,12 @@ printf "%s" "
 defaultyes=True
 fastestmirror=True
 max_parallel_downloads=20
-install_weak_deps=False
 " | sudo tee -a /etc/dnf/dnf.conf
 ## Eliminar Paquetes no necesarios
 sudo dnf remove libreoffice\* tigervnc-server-minimal ibus skanpage akregator kmail neochat kontact korganizer ktnef \
-                kaddressbook kcharselect kfind kgpg kmousetool kmouth kwrite filelight anaconda\* ModemManager b43\* \
-                fedora-bookmarks im-chooser imsettings kde-settings-pulseaudio kwalletmanager5 plasma-discover virtualbox\* \
-                qemu-guest-agent plasma-nm-\* usb_modeswitch open-vm-tools PackageKit zd1211-firmware atmel-firmware \
-                libertas-usb8388-firmware abrt\* bluez-cups alsa-sof-firmware boost-date-time orca mailcap samba-client \
-                libreswan unbound-libs podman yajl mediawriter nano nano-default-editor thermald sos kpartx dos2unix sssd \
-                cyrus-sasl-plain geolite2\* traceroute tcpdump nmap-ncat spice-vdagent adcli mtr realmd teamd vpnc openconnect \
-                openvpn ppp pptp rsync xorg-x11-drv-vmware hyperv\* dragon kmines kpat dnfdragora elisa-player kamoso konversation \
-                krdc kmahjongg krfb kamera kmag media-player-info gtk2 NetworkManager-adsl akonadi-server audiocd-kio bash-\* \
-                bc brltty flatpak-kcm gnome-disk-utility default-fonts-am alsa-ucm xsettingsd at brcmfmac-firmware hplip ibus-gtk3\
-                kio-gdrive kio-admin libappindicator-gtk3 plasma-drkonqi phonon-qt5
+                kaddressbook kcharselect kfind kgpg kmousetool kmouth kwrite filelight anaconda\* b43\* \
+                mediawriter nano nano-default-editor vpnc openconnect openvpn dragon dnfdragora elisa-player \
+                kamoso konversation kamera kmag gtk2 audiocd-kio bash-\* 
 ## Remover dependencias inecesarias
 sudo dnf autoremove
 ## Atualizar 
@@ -30,7 +22,7 @@ sudo dnf --refresh --releasever=rawhide distro-sync
 sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
                  https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 ## Instalar packetes mas usados 
-sudo dnf install fontawesome-fonts-all langpacks-es plasma-workspace-x11 vim-default-editor zsh wine-fonts lsd lm_sensors \
+sudo dnf install fontawesome-fonts-all langpacks-es vim-default-editor zsh wine-fonts lsd lm_sensors \
                  kate printer-driver-brlaser  --allowerasing
 ## Actualizacion de firmware
 sudo fwupdmgr get-devices
@@ -46,7 +38,6 @@ sudo dnf swap mesa-va-drivers mesa-va-drivers-freeworld
 sudo dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
 sudo dnf install gcc kernel-headers kernel-devel akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs
 sudo dnf install nvidia-vaapi-driver libva-utils vdpauinfo
-sudo dnf install nvidia-vaapi-driver
 sudo cp -p /usr/share/X11/xorg.conf.d/nvidia.conf /etc/X11/xorg.conf.d/nvidia.conf
 
 printf "%s" "
@@ -62,4 +53,4 @@ sudo curl -o /etc/yum.repos.d/softmaker.repo https://shop.softmaker.com/repo/sof
 echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
 
 sudo dnf distro-sync
-sudo dnf install softmaker-freeoffice-2021 code-insiders
+sudo dnf install softmaker-freeoffice-2024 code-insiders
