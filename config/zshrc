@@ -23,16 +23,5 @@ fi
 alias ls='lsd'
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-autoload -Uz compinit
-compinit
-command_not_found_handler (){
-	xlocate /bin/$1\$
-}
-alias i='sudo xbps-install -S'
-alias ud='sudo xbps-install -Su'
-alias de='sudo xbps-remove -Ro'
-alias se='xbps-query -Rs'
-alias sef='xlocate'
-alias udf='xlocate -S'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

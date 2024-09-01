@@ -6,10 +6,10 @@ fastestmirror=True
 max_parallel_downloads=20
 " | sudo tee -a /etc/dnf/dnf.conf
 ## Eliminar Paquetes no necesarios
-sudo dnf remove libreoffice\* tigervnc-server-minimal ibus skanpage akregator kmail neochat kontact korganizer ktnef \
+sudo dnf remove libreoffice\* tigervnc-server-minimal ibus skanpage akregator kmail kontact korganizer ktnef \
                 kaddressbook kcharselect kfind kgpg kmousetool kmouth kwrite filelight anaconda\* b43\* \
                 mediawriter nano nano-default-editor vpnc openconnect openvpn dragon dnfdragora elisa-player \
-                kamoso konversation kamera kmag gtk2 audiocd-kio bash-\* 
+                kamoso konversation kamera kmag gtk2 audiocd-kio  
 ## Remover dependencias inecesarias
 sudo dnf autoremove
 ## Atualizar 
