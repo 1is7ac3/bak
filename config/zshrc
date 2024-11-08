@@ -21,9 +21,9 @@ fi
 
 # Customize to your needs...
 alias ls='lsd'
-alias se='paru -Ss'
-alias sef='pacman -Fx'
-alias i='sudo pacman -Sy'
+alias se='yay -Ss'
+alias sef='yay -Fyx'
+alias i='sudo yay -Sy'
 alias de='sudo pacman -Rcnsu'
 alias autoremove='pacman -Qqdt | sudo pacman -Rsu -'
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
