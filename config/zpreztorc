@@ -40,6 +40,12 @@ zstyle ':prezto:load' pmodule \
   'history-substring-search' \
   'syntax-highlighting' \
   'autosuggestions' \
+  'ssh' \
+  'git' \
+  'auto-notify' \
+  'python' \
+  'helper' \
+  'alias-tips' \
   'prompt'
 #
 # Autosuggestions
