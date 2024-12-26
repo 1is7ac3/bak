@@ -8,10 +8,9 @@ fi
 alias pkg="./xbps-src pkg"
 alias src="./xbps-src"
 alias ls='lsd'
-alias se='xbps-query -Rs'
-alias sef='xlocate -S'
-alias i='sudo xbps-install -S'
-alias de='sudo xbps-remove -Ro'
+alias xs='xbps-query'
+alias xf='xlocate'
+alias xr='sudo xbps-remove -Ro'
 #
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
@@ -23,7 +22,7 @@ ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 #
 function command_not_found_handler {
-    printf 'zsh: comando no encontrado: %s\n' "$1"
+    printf "${bright}$1${reset} se puede encontrar en los siguientes paquetes:\n"
     xlocate /bin/$1\$
 }
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
