@@ -1,0 +1,6 @@
+#!/bin/sh
+while read linea
+do
+	echo $linea
+	xbps-install -S $linea
+done < $1
