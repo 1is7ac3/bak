@@ -2,5 +2,5 @@
 while read linea
 do
 	echo $linea
-	xbps-install -S $linea
+	xbps-install -Sy $linea
 done < $1
