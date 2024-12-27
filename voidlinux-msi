@@ -1,3 +1,7 @@
+void-artwork
+void-repo-multilib
+void-repo-multilib-nonfree
+void-repo-nonfree
 NetworkManager
 ark
 base-files
@@ -58,10 +62,6 @@ telegram-desktop
 tzdata
 usbutils
 util-linux
-void-artwork
-void-repo-multilib
-void-repo-multilib-nonfree
-void-repo-nonfree
 wifi-firmware
 xbps
 xmirror
