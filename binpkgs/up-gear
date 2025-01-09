@@ -1,0 +1,8 @@
+!#/bin/sh
+while read linea
+do
+	echo $linea
+	or_version=$(cat srcpkgs/${linea}/template | grep  '^version')
+	sed -i "s/$or_version/version=$1/g" srcpkgs/${linea}/template
+	xgensum -i $linea
+done < gear 

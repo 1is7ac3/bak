@@ -1,0 +1,25 @@
+# Template file for 'code-insiders'
+pkgname=code-insiders
+version=1.97
+revision=1
+archs="x86_64"
+short_desc="Microsoft visual studio code insiders"
+maintainer="1is7ac3 <isaac.qa13@gmail.com>"
+license="MIT"
+homepage="https://code.visualstudio.com/"
+distfiles="https://code.visualstudio.com/sha/download?build=insider&os=linux-rpm-x64>${pkgname}-${version}.rpm"
+checksum=744ae30b07c1cb29197787878586a2f38c46313e8e3532d8d96cd0a5f06f540b
+allow_unknown_shlibs=yes
+nodebug=yes
+nostrip=yes
+repository=nonfree
+ignore_elf_dirs="/usr/share/code-insiders"
+
+do_install() {
+	vcopy share/ usr/
+	vlicense share/code-insiders/LICENSES.chromium.html
+	cd ${DESTDIR}/usr/
+	mkdir bin
+	cd bin
+	ln -s /usr/share/code-insiders/bin/code-insiders code-insiders
+}

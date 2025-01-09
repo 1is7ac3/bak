@@ -1,0 +1,4 @@
+#!/bin/sh
+or_version=$(cat srcpkgs/$2/template | grep  '^version')
+sed -i "s/$or_version/version=$1/g" srcpkgs/$2/template
+xgensum -i $2
