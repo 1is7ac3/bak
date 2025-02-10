@@ -1,0 +1,9 @@
+set number
+syntax enable
+set completeopt=menuone,noselect
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set mouse=a
+set history=1000
+set colorcolumn=80
