@@ -10,7 +10,9 @@ alias src="./xbps-src"
 alias ls='lsd'
 alias xs='xbps-query'
 alias xf='xlocate'
-alias xr='doas xbps-remove -Ro'
+alias xr='sudo xbps-remove -Ro'
+alias nightly='~/Git/firefox/firefox'
+alias code='code-insiders'
 #
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
