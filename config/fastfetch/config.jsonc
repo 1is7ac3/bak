@@ -43,21 +43,25 @@
     },
     {
       "type": "cpu",
+      "temp": true,
       "key": " \uec19",
       "keyColor": "red"
     },
     {
       "type": "gpu",
+      "temp": true,
       "key": " \ue266",
       "keyColor": "green"
     },
     {
       "type": "memory",
       "key": " \uefc5",
+      "temp": true,
       "keyColor": "blue"
     },
     {
       "type": "disk",
+      "temp": true,
       "key": " \uf0a0",
       "keyColor": "magenta"
     },
