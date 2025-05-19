@@ -1,3 +1,10 @@
+package archlinux
+package bass
 package colored-man-pages
+package error
+package foreign-env
+package fzf
+package getopts
+package pisces
 theme agnoster
 theme IlanCosman/tide
