@@ -1,1 +1,7 @@
+alias de="sudo pacman -Rscnu"
+alias se="pacman -Ss"
+alias up="sudo pacman -Syu"
+alias re="sudo pacman -Rsn $(pacman -Qtdq)"
 source /usr/share/cachyos-zsh-config/cachyos-config.zsh
+source /usr/share/doc/find-the-command/ftc.zsh noprompt quiet
+
